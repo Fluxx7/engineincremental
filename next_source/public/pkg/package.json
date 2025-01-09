@@ -1,0 +1,15 @@
+{
+  "name": "engine_incremental_game",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "engine_incremental_game_bg.wasm",
+    "engine_incremental_game.js",
+    "engine_incremental_game.d.ts"
+  ],
+  "main": "engine_incremental_game.js",
+  "types": "engine_incremental_game.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
