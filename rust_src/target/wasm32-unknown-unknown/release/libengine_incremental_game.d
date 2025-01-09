@@ -1,0 +1,1 @@
+/Users/nicholas/Documents/Engine\ Incremental/engineincremental/rust_src/target/wasm32-unknown-unknown/release/libengine_incremental_game.rlib: /Users/nicholas/Documents/Engine\ Incremental/engineincremental/rust_src/src/lib.rs
