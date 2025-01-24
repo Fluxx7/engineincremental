@@ -193,9 +193,6 @@ export class EngineGame {
     update(throttle) {
         wasm.enginegame_update(this.__wbg_ptr, throttle);
     }
-    step_on_it() {
-        wasm.enginegame_step_on_it(this.__wbg_ptr);
-    }
     /**
      * @returns {number}
      */

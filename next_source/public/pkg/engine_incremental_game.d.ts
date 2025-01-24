@@ -4,7 +4,6 @@ export class EngineGame {
   free(): void;
   constructor(gear_ratio: number);
   update(throttle: number): void;
-  step_on_it(): void;
   rpm(): number;
   torque(): number;
   speed: number;
@@ -49,7 +48,6 @@ export interface InitOutput {
   readonly __wbg_set_enginegame_gear_ratio: (a: number, b: number) => void;
   readonly enginegame_default: (a: number) => number;
   readonly enginegame_update: (a: number, b: number) => void;
-  readonly enginegame_step_on_it: (a: number) => void;
   readonly enginegame_rpm: (a: number) => number;
   readonly enginegame_torque: (a: number) => number;
   readonly __wbindgen_export_0: WebAssembly.Table;

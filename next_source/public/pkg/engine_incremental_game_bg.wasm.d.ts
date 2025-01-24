@@ -26,7 +26,6 @@ export const __wbg_get_enginegame_gear_ratio: (a: number) => number;
 export const __wbg_set_enginegame_gear_ratio: (a: number, b: number) => void;
 export const enginegame_default: (a: number) => number;
 export const enginegame_update: (a: number, b: number) => void;
-export const enginegame_step_on_it: (a: number) => void;
 export const enginegame_rpm: (a: number) => number;
 export const enginegame_torque: (a: number) => number;
 export const __wbindgen_export_0: WebAssembly.Table;

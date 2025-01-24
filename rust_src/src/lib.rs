@@ -29,12 +29,16 @@ impl ICEngine {
     }
 
     fn update_rpm(&mut self, speed: f64, gear_ratio: f64, wheel_radius: f64) {
-        self.rpm = ((speed * gear_ratio) / (2.0 * 3.14 * wheel_radius) * 60.0) as u64;
-        if self.rpm > self.redline {
-            self.rpm = self.redline; // Cap at max RPM
-        } 
-        if self.rpm < self.idle {
-            self.rpm = self.idle;
+        if gear_ratio == 0.0 {
+            self.rpm = self.redline;
+        } else {
+            self.rpm = ((speed * gear_ratio) / (2.0 * 3.14 * wheel_radius) * 60.0) as u64;
+            if self.rpm > self.redline {
+                self.rpm = self.redline; 
+            } 
+            if self.rpm < self.idle {
+                self.rpm = self.idle;
+            }
         }
     }
 }
@@ -60,7 +64,7 @@ impl EngineGame {
     #[wasm_bindgen(constructor)]
     pub fn default(gear_ratio: f64) -> EngineGame {
         EngineGame {
-            speed: 10.0,
+            speed: 0.0,
             points: 0.0,
             distance: 0.0,
             fuel: 100.0,
@@ -84,10 +88,7 @@ impl EngineGame {
     pub fn update(&mut self, throttle: f64){
         let air_density = 1.225; // Air density in kg/m^3
 
-        self.engine.update_rpm(self.speed, self.gear_ratio, self.wheel_radius);
-
         let mut accel_force = 0.0;
-
         if throttle > 0.0 {
             if self.fuel > 0.0 {
                 accel_force = self.engine.force(self.gear_ratio, self.wheel_radius, self.drivetrain_efficiency);
@@ -105,12 +106,10 @@ impl EngineGame {
         self.speed += acceleration / 60.0;
         self.distance += self.speed / 60.0;
         self.points += self.update_score();
+
+        self.engine.update_rpm(self.speed, self.gear_ratio, self.wheel_radius);
         
     } 
-
-    pub fn step_on_it(&mut self) {
-
-    }
 
     pub fn rpm(&self) -> f64 {
         self.engine.rpm as f64
