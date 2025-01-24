@@ -11,6 +11,9 @@ pub struct ICEngine {
 
 impl ICEngine {
     fn force(&self, gear_ratio: f64, wheel_radius: f64, drivetrain_efficiency: f64) -> f64 {
+        if self.rpm == self.redline {
+            return 0.0;
+        }
         let wheel_torque = self.torque() * gear_ratio * drivetrain_efficiency;
         wheel_torque / wheel_radius // Force in Newtons
     }
@@ -20,7 +23,7 @@ impl ICEngine {
     }
 
     fn fuel_consumption(&self, power: f64, bsfc: f64) -> f64 {
-        (power * bsfc / self.efficiency) / 6000.0
+        (power * bsfc / self.efficiency) / 600.0
     }
 
     fn torque(&self) -> f64 {

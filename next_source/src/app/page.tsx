@@ -40,8 +40,8 @@ function MainGame() {
 
     function gameLoop() {
       game!.update(throttle); 
-      setDistance(game!.distance);
-      setSpeed(game!.speed);
+      setDistance(game!.distance * 0.0006213712);
+      setSpeed(game!.speed * 2.236936);
       setFuel(game!.fuel);
       setScore(game!.points);
       setRpm(game!.rpm());
@@ -63,7 +63,7 @@ function MainGame() {
         {game ? <>
           <div className="justify-center">
             <br />
-            Speed: {speed.toFixed(2)} meters per second, Distance: {distance.toFixed(2)} meters <br />
+            Speed: {speed.toFixed(2)} miles per hour, Distance: {distance.toFixed(2)} miles <br />
             RPM: {rpm}, Torque: {torque.toFixed(2)} Nm  <br />
             Fuel: {fuel.toFixed(2)} liters <br />
             Throttle: {throttle.toFixed(2)} <br/>
