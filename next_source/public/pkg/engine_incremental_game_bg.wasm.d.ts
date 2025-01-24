@@ -4,6 +4,8 @@ export const memory: WebAssembly.Memory;
 export const __wbg_enginegame_free: (a: number, b: number) => void;
 export const __wbg_get_enginegame_speed: (a: number) => number;
 export const __wbg_set_enginegame_speed: (a: number, b: number) => void;
+export const __wbg_get_enginegame_points: (a: number) => number;
+export const __wbg_set_enginegame_points: (a: number, b: number) => void;
 export const __wbg_get_enginegame_distance: (a: number) => number;
 export const __wbg_set_enginegame_distance: (a: number, b: number) => void;
 export const __wbg_get_enginegame_fuel: (a: number) => number;
@@ -23,7 +25,7 @@ export const __wbg_set_enginegame_drivetrain_efficiency: (a: number, b: number) 
 export const __wbg_get_enginegame_gear_ratio: (a: number) => number;
 export const __wbg_set_enginegame_gear_ratio: (a: number, b: number) => void;
 export const enginegame_default: (a: number) => number;
-export const enginegame_update: (a: number) => number;
+export const enginegame_update: (a: number, b: number) => void;
 export const enginegame_rpm: (a: number) => number;
 export const enginegame_torque: (a: number) => number;
 export const __wbindgen_export_0: WebAssembly.Table;
