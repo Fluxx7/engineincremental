@@ -51,6 +51,19 @@ export class EngineGame {
     /**
      * @returns {number}
      */
+    get points() {
+        const ret = wasm.__wbg_get_enginegame_points(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @param {number} arg0
+     */
+    set points(arg0) {
+        wasm.__wbg_set_enginegame_points(this.__wbg_ptr, arg0);
+    }
+    /**
+     * @returns {number}
+     */
     get distance() {
         const ret = wasm.__wbg_get_enginegame_distance(this.__wbg_ptr);
         return ret;
@@ -175,11 +188,13 @@ export class EngineGame {
         return this;
     }
     /**
-     * @returns {boolean}
+     * @param {number} throttle
      */
-    update() {
-        const ret = wasm.enginegame_update(this.__wbg_ptr);
-        return ret !== 0;
+    update(throttle) {
+        wasm.enginegame_update(this.__wbg_ptr, throttle);
+    }
+    step_on_it() {
+        wasm.enginegame_step_on_it(this.__wbg_ptr);
     }
     /**
      * @returns {number}

@@ -7,11 +7,12 @@ function MainGame() {
   const [game, setGame] = useState<EngineGame | null>(null);
   const [distance, setDistance] = useState(0);
   const [speed, setSpeed] = useState(0);
+  const [score, setScore] = useState(0);
   const [fuel, setFuel] = useState(0);
   const [rpm, setRpm] = useState(0);
   const [torque, setTorque] = useState(0);
   const [gear, setGear] = useState(1);
-  const [drive, setDrive] = useState(false);
+  const [throttle, setThrottle] = useState(0);
 
   useEffect(() => {
     async function loadWasm() {
@@ -30,27 +31,23 @@ function MainGame() {
     let animationFrameId: number;
 
     function gameLoop() {
-      game!.update(); // Call the game's update logic
+      game!.update(1.0); 
 
-      // Update React state with the new game values
       setDistance(game!.distance);
       setSpeed(game!.speed);
       setFuel(game!.fuel);
+      setScore(game!.points);
       setRpm(game!.rpm());
       setTorque(game!.torque());
       
 
-      if (game!.fuel > 0.0) {
-        animationFrameId = requestAnimationFrame(gameLoop);
-      } else {
-        setDrive(false);
-      }
+      animationFrameId = requestAnimationFrame(gameLoop);
     }
 
-    if (drive) animationFrameId = requestAnimationFrame(gameLoop);
+    animationFrameId = requestAnimationFrame(gameLoop);
 
     return () => cancelAnimationFrame(animationFrameId); // Cleanup on unmount
-  }, [game, drive]);
+  }, [game]);
 
   return (
     <div>
@@ -61,15 +58,19 @@ function MainGame() {
             <br />
             Speed: {speed.toFixed(2)} meters per second, Distance: {distance.toFixed(2)} meters <br />
             RPM: {rpm}, Torque: {torque.toFixed(2)} Nm  <br />
-            Fuel: {fuel.toFixed(2)} liters
+            Fuel: {fuel.toFixed(2)} liters <br />
+            Points: {score.toFixed(0)}
           </div>
-          Gear Ratio:
-          <input className="bg-blue-400" defaultValue={gear} onChange={(e) => { game.gear_ratio = Number(e.target.value); setGear(Number(e.target.value)) }}></input>
-          {(fuel > 0.0) ? (drive ?
-              <button onClick={() => setDrive(false)}>
+          Gear Ratio: {gear}
+
+          <br/>
+          Set New Ratio:
+          <input className="bg-blue-400" defaultValue={gear} onChange={(e) => { if (!isNaN(Number(e.target.value))) {game.gear_ratio = Number(e.target.value); setGear(Number(e.target.value)) }}}></input>
+          {(fuel > 0.0) ? (throttle > 0 ?
+              <button onClick={() => setThrottle(0)}>
                 Stop
               </button> :
-            <button onClick={() => setDrive(true)}>
+            <button onClick={() => setThrottle(1)}>
               Go
             </button>)
             :
