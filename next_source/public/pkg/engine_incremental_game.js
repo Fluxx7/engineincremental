@@ -77,6 +77,19 @@ export class EngineGame {
     /**
      * @returns {number}
      */
+    get tank_size() {
+        const ret = wasm.__wbg_get_enginegame_tank_size(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @param {number} arg0
+     */
+    set tank_size(arg0) {
+        wasm.__wbg_set_enginegame_tank_size(this.__wbg_ptr, arg0);
+    }
+    /**
+     * @returns {number}
+     */
     get fuel() {
         const ret = wasm.__wbg_get_enginegame_fuel(this.__wbg_ptr);
         return ret;
@@ -198,6 +211,13 @@ export class EngineGame {
      */
     rpm() {
         const ret = wasm.enginegame_rpm(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {number}
+     */
+    refuel() {
+        const ret = wasm.enginegame_refuel(this.__wbg_ptr);
         return ret;
     }
     /**

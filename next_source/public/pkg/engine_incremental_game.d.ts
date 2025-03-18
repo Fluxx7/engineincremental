@@ -5,10 +5,12 @@ export class EngineGame {
   constructor(gear_ratio: number);
   update(throttle: number): void;
   rpm(): number;
+  refuel(): number;
   torque(): number;
   speed: number;
   points: number;
   distance: number;
+  tank_size: number;
   fuel: number;
   mass: number;
   bsfc: number;
@@ -30,6 +32,8 @@ export interface InitOutput {
   readonly __wbg_set_enginegame_points: (a: number, b: number) => void;
   readonly __wbg_get_enginegame_distance: (a: number) => number;
   readonly __wbg_set_enginegame_distance: (a: number, b: number) => void;
+  readonly __wbg_get_enginegame_tank_size: (a: number) => number;
+  readonly __wbg_set_enginegame_tank_size: (a: number, b: number) => void;
   readonly __wbg_get_enginegame_fuel: (a: number) => number;
   readonly __wbg_set_enginegame_fuel: (a: number, b: number) => void;
   readonly __wbg_get_enginegame_mass: (a: number) => number;
@@ -49,6 +53,7 @@ export interface InitOutput {
   readonly enginegame_default: (a: number) => number;
   readonly enginegame_update: (a: number, b: number) => void;
   readonly enginegame_rpm: (a: number) => number;
+  readonly enginegame_refuel: (a: number) => number;
   readonly enginegame_torque: (a: number) => number;
   readonly __wbindgen_export_0: WebAssembly.Table;
   readonly __wbindgen_start: () => void;

@@ -1,0 +1,3 @@
+Hi! This is a personal project of mine that is currently very unfinished. The goal is to create an incremental game centered around upgrading a car, mainly its engine, to travel further, faster, and more efficiently. Right now, it's just a bad simulator but once I get the fuel consumption and deceleration working better, I'll start to implement actual game features. You can play the game at [engineincremental.fluxxi.net](https://engineincremental.fluxxi.net/)
+
+The main game systems are coded in Rust, mostly so I can learn Rust but it should also allow for better performance, and the UI is all done in Next.js. Expect pretty much everything to change a lot as development continues
