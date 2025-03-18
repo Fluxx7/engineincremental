@@ -9,6 +9,7 @@ function MainGame() {
   const [speed, setSpeed] = useState(0);
   const [score, setScore] = useState(0);
   const [fuel, setFuel] = useState(0);
+  const [mpg, setMpg] = useState(0);
   const [rpm, setRpm] = useState(0);
   const [torque, setTorque] = useState(0);
   const [gear, setGear] = useState(1);
@@ -21,7 +22,7 @@ function MainGame() {
       const newGame = new EngineGame(gear);
       //newGame.speed = 10.0;
       setGame(newGame);
-      setFuel(100);
+      setMpg(newGame.fuel);
     }
 
     loadWasm();
@@ -65,7 +66,7 @@ function MainGame() {
             <br />
             Speed: {speed.toFixed(2)} miles per hour, Distance: {distance.toFixed(2)} miles <br />
             RPM: {rpm}, Torque: {torque.toFixed(2)} Nm  <br />
-            Fuel: {fuel.toFixed(2)} liters <br />
+            Fuel: {fuel.toFixed(2)} liters | MPL: {(distance/mpg).toFixed(2)} mpl <br />
             Throttle: {throttle.toFixed(2)} <br/>
             Points: {score.toFixed(0)}
           </div>
@@ -82,7 +83,7 @@ function MainGame() {
               Go
             </button>)
             :
-            <button onClick={() => {game.fuel = 100.0; setFuel(100.0)}}>
+            <button onClick={() => { setMpg(mpg + game.refuel())}}>
               Refuel
             </button>}
             

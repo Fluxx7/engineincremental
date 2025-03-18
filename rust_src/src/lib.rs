@@ -23,7 +23,7 @@ impl ICEngine {
     }
 
     fn fuel_consumption(&self, power: f64, bsfc: f64) -> f64 {
-        (power * bsfc / self.efficiency) / 600.0
+        (power * bsfc / self.efficiency) / 60000.0
     }
 
     fn torque(&self) -> f64 {
@@ -51,7 +51,8 @@ pub struct EngineGame {
     pub speed: f64, // Speed in m/s
     pub points: f64,
     pub distance: f64,
-    pub fuel: f64, // Initial fuel in liters
+    pub tank_size: f64, // Fuel max in liters
+    pub fuel: f64, // Current fuel in liters
     pub mass: f64, // Mass of the car in kg
     pub bsfc: f64, // Brake Specific Fuel Consumption in kg/J
     pub drag_coefficient: f64,
@@ -70,7 +71,8 @@ impl EngineGame {
             speed: 0.0,
             points: 0.0,
             distance: 0.0,
-            fuel: 100.0,
+            tank_size: 5.0,
+            fuel: 5.0,
             mass: 1500.0,
             bsfc: 0.00025,
             drag_coefficient: 0.3,
@@ -116,6 +118,11 @@ impl EngineGame {
 
     pub fn rpm(&self) -> f64 {
         self.engine.rpm as f64
+    }
+
+    pub fn refuel(&mut self) -> f64 {
+        self.fuel = self.tank_size;
+        self.tank_size
     }
 
     fn update_score(&self) -> f64 {
